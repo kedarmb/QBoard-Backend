@@ -1,0 +1,27 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QUARK</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/verify.css' %}">
+</head>
+<body>
+    <div class="sac">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12 col-sm-12">
+            <div class="box3">
+              <div class="form1">
+                <p>Your account is activated. Please login.</p>
+    
+                <p class="sign"><a href="https://quark-app.herokuapp.com/login"><button class="btn btn-primary">Sign in</button></a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
