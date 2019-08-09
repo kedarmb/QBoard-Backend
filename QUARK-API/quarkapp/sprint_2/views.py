@@ -519,11 +519,11 @@ def show_graph(request):
 # API to Read RPA Output file
 @csrf_exempt
 def readRPAFile(request):
-    # wb = xlrd.open_workbook('RPAoutput.xlsx')
+    wb = xlrd.open_workbook('RPA Execution Output.xlsx')
     # wb = xlrd.open_workbook('TestData.xlsx')
     # wb = xlrd.open_workbook('rpaInfo.xlsx')
     # wb = xlrd.open_workbook('result_2.xlsx')
-    wb = xlrd.open_workbook('RPA Execution Output.xlsx')
+    # wb = xlrd.open_workbook('RPA Execution Output.xlsx')
     sh = wb.sheet_by_name('Execution Details')
     # sh = wb.sheet_by_index(0)
     print(sh)
@@ -536,8 +536,9 @@ def readRPAFile(request):
     data_list = []
     data = {}
     conn = getConnection()
-    conn.drop_collection('new_rpaInfo')
-    collection = conn['new_rpaInfo']
+    # conn.drop_collection('new_rpaInfo')
+    # collection = conn['new_rpaInfo']
+    collection = conn['rpaInfo']
     # collection.index_information()
     # print(len(columan_name[0]))
     # Iterate through each row in worksheet and fetch values into dict
@@ -558,12 +559,14 @@ def readRPAFile(request):
             data_list.append(data.copy())
     # print(data_list)
     collection.insert_many(data_list)
+    total_documents = collection.find().count()
     # data_list = json.dumps(data_list)
     
 
     return JsonResponse({
         "message": "success",
         "Total Rows" : len(data_list),
+        "Total Documents": total_documents
         # "data": data_list
     })
 
@@ -573,7 +576,7 @@ def defects_by_severity(request):
     if request.method == 'GET':
         conn = getConnection()
         # collection = conn['rpaInfo']
-        collection = conn['new_rpaInfo']
+        collection = conn['rpaInfo']
         module_list = list(collection.distinct("Module"))
         severity_list = list(collection.distinct("Severity"))
         severity_list = list(filter(None,severity_list))
@@ -751,7 +754,7 @@ def severity_by_cycle_by_modules(request):
     if request.method == 'GET':
         conn =getConnection()
         # collection = conn['rpaInfo']
-        collection = conn['new_rpaInfo']
+        collection = conn['rpaInfo']
 
         module_list = list(collection.distinct("Module"))
 
@@ -791,7 +794,7 @@ def severity_by_cycle_by_modules(request):
 def success_trend_graph(request):
         conn =getConnection()
         # collection = conn['rpaInfo']
-        collection = conn['new_rpaInfo']
+        collection = conn['rpaInfo']
 
         test_cycle_list = list(collection.distinct("Test Cycle #"))
         test_cycle_list = list(filter(None, test_cycle_list))
@@ -838,7 +841,7 @@ def infoTileData(request):
     if request.method == 'GET':
         conn=getConnection()
         # collection = conn['rpaInfo']
-        collection = conn['new_rpaInfo']
+        collection = conn['rpaInfo']
         #Distinct Modules List
         module_list = list(collection.distinct("Module"))
         severity_list = list(collection.distinct('Severity'))
@@ -924,7 +927,7 @@ def drill_down_DefectBySeverity(request):
         module = request.GET['module']
         conn = getConnection()
         # collection = conn['rpaInfo']
-        collection = conn['new_rpaInfo']
+        collection = conn['rpaInfo']
         if module=='Defect Management':
             dataList = list(collection.find({'Expected Result': 'Pass', 'Actual Result': 'Fail'},
                                             {'SL #': 1, 'Module': 1, 'Test Case ID': 1, 'Scenario ID': 1, 'Test Cycle #': 1,
@@ -972,7 +975,7 @@ def drill_down_TestCases(request):
         result = request.GET['result']
         conn = getConnection()
         # collection = conn['rpaInfo']
-        collection = conn['new_rpaInfo']
+        collection = conn['rpaInfo']
         if result == 'Test Case Management':
             dataList = list(collection.find({}, {'SL #': 1, 'Module': 1, 'Test Case ID': 1, 'Scenario ID': 1, 'Test Cycle #': 1,
                                              'Expected Result': 1, 'User': 1, 'Execution Date': 1, 'Actual Result': 1,
@@ -1019,7 +1022,7 @@ def infoTileDataDetails(request):
         result = request.GET['value']
         conn = getConnection()
         # collection = conn['rpaInfo']
-        collection = conn['new_rpaInfo']
+        collection = conn['rpaInfo']
         # Distinct Modules List
         module_list = list(collection.distinct("Module"))
         execution_date_list = list(collection.distinct("Execution Date"))
@@ -1106,10 +1109,10 @@ def update_table(request):
         reqData = request.body.decode('utf8')
         table_data = json.loads(reqData)
 
-        # print(table_data)
+        # print(type(table_data)
 
         conn = getConnection()
-        collection = conn['new_rpaInfo']
+        collection = conn['rpaInfo']
 
         for each_table_row in table_data:
 
