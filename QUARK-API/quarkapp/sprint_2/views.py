@@ -824,9 +824,10 @@ def success_trend_graph(request):
                 for data in dl:
 
                     per=round((int(data['Actual Result'])/(int(total[0]['Actual Result'])))*100)
-                    temp[str(actualResult)] = str(per)
+                    temp[str(actualResult)] = per
 
             final.append(temp)
+        print(final)
         data = dict(zip(final_test_cycle_list, final))
         return JsonResponse({
             "message" : "success",
