@@ -57,7 +57,7 @@ def signup(request):
 
         Please click on the below link for email verification and account activation:
 
-        https://quarkapp.herokuapp.com/verify?username={0}
+        https://quarkapi.herokuapp.com/verify?username={0}
 
         Yours Truly,
         QUARK Support Team
@@ -191,7 +191,7 @@ def validate_email(request):
 
             Please click on the below link to reset your password:
 
-            https://quark-app.herokuapp.com/q_pawrd?username={0}
+            https://quarkui.herokuapp.com/q_pawrd?username={0}
 
             Yours Truly,
             QUARK Support Team
@@ -300,7 +300,7 @@ def test_email(username , subject , message):
     if send_mail(
         subject,
         message,
-        'quarksupport@eainfobiz.com',
+        'ajain@thinkperfect.io',
         [username],
         fail_silently=False,
     ):

@@ -152,5 +152,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp-mail.outlook.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER ='kbelavanaki@eainfobiz.com'
-EMAIL_HOST_PASSWORD = 'msOFC@4007173336'
+EMAIL_HOST_USER ='ajain@thinkperfect.io'
+EMAIL_HOST_PASSWORD = 'Akhil@1992'
