@@ -1,1 +1,1 @@
-# QBoard API built in Python Django Framework
+# QBoard API's built in Python Django Framework
