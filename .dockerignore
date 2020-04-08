@@ -1,0 +1,5 @@
+.gitignore
+*.xlsx
+*.md
+*.docx
+.git/

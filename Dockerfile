@@ -1,5 +1,6 @@
 # pull official base image
-FROM python:3.7.3
+FROM alpine:3.7
+RUN apk add --update python py-pip
 
 # set work directory
 WORKDIR /code/

@@ -1,0 +1,18 @@
+language: python
+
+services:
+  - mongodb
+  - docker
+
+branches:
+  only:
+    - master
+
+env:
+  global:
+    - MONGO_URI=mongodb://asaha@eainfobiz.com:MongoDB@2020@mongodb-6953-0.cloudclusters.net:10001/Quark?authSource=admin
+
+after_success:
+  - sh .travis/deploy_dockerhub.sh
+  - test "$TRAVIS_BRANCH" = "master" && sh .travis/deploy_heroku.sh
+
