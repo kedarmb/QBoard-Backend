@@ -28,8 +28,6 @@ services:
         restart: always
         depends_on: 
             - mongodb
-        links:
-            - mongodb
 
 networks: 
     python-network:
