@@ -4,3 +4,6 @@
 *.docx
 .git/
 .travis*
+*.yml
+Dockerfile*
+Jenkinsfile*
