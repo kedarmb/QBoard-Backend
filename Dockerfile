@@ -1,6 +1,5 @@
 # pull official base image
-FROM alpine:3.7
-RUN apk add --update python py-pip
+FROM python:3.7
 
 # set work directory
 WORKDIR /code/
@@ -9,9 +8,9 @@ WORKDIR /code/
 ENV PYTHONUNBUFFERED 1
 
 # install dependencies
-RUN pip install --upgrade pip
+RUN pip3 install --upgrade pip
 COPY requirements.txt /code/
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 # copy project source code
 COPY . /code/
